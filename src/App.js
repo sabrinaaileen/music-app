@@ -2,6 +2,12 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 
+import RecentlyPlayed from "./components/RecentlyPlayed";
+import TopHits from "./components/TopHits";
+import SearchBar from "./components/SearchBar";
+import SearchResults from "./components/SearchResults";
+import Playlist from "./components/Playlist";
+
 const spotifyApi = new SpotifyWebApi();
 
 const getTokenFromUrl = () => {
@@ -48,21 +54,50 @@ function App() {
 
   return (
     <div className="App">
-      {!loggedIn && (
-        <a href="http://localhost:8888" className="login-button">
-          Login to Spotify
-        </a>
-      )}
-      {loggedIn && (
-        <>
-          <div>Now Playing: {nowPlaying.name}</div>
-          <div>
-            <img src={nowPlaying.albumArt} style={{ height: 150 }} />
+      <div>
+        {!loggedIn && (
+          <a href="http://localhost:8888" className="login-button">
+            Login to Spotify
+          </a>
+        )}
+        <div className="now-playing-container">
+          {loggedIn && <h1>Welcome to your Music!</h1>}
+          {loggedIn && (
+            <>
+              <h2>Now Playing: {nowPlaying.name}</h2>
+              <div>
+                <img src={nowPlaying.albumArt} style={{ height: 150 }} />
+              </div>
+            </>
+          )}
+          {loggedIn && (
+            <button onClick={() => getNowPlaying()}>Check Now Playing</button>
+          )}
+        </div>
+      </div>
+      <main>
+        {loggedIn && <SearchBar />}
+        {loggedIn && (
+          <div className="grid">
+            <div className="grid-item">
+              <SearchResults />
+            </div>
+            <div className="grid-item">
+              <Playlist />
+            </div>
           </div>
-        </>
-      )}
+        )}
+      </main>
+
       {loggedIn && (
-        <button onClick={() => getNowPlaying()}>Check Now Playing</button>
+        <div className="grid">
+          <div className="grid-item">
+            <RecentlyPlayed />
+          </div>
+          <div className="grid-item">
+            <TopHits />
+          </div>
+        </div>
       )}
     </div>
   );

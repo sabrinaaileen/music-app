@@ -43,6 +43,47 @@
   transform: scale(1.2);
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.now-playing-container {
+  padding: 20px;
+  margin: 15px;
+}
+.now-playing-container h1 {
+  font-size: 40px;
+  color: rgb(78, 0, 151);
+  font-style: italic;
+  margin-bottom: 30px;
+}
+.now-playing-container h2 {
+  font-size: 30px;
+  color: rgb(132, 6, 249);
+  text-shadow: 5px 5px 5px rgba(138, 43, 226, 0.5);
+  transition: all 2s ease-in-out;
+}
+.now-playing-container h2:hover {
+  transform: scale(2);
+}
+.now-playing-container button {
+  padding: 10px 15px;
+  background-color: rgba(138, 43, 226, 0.2);
+  border: 1px solid rgb(132, 6, 249);
+  color: rgb(132, 6, 249);
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 100ms all ease-in-out;
+}
+
+.now-playing-container button:hover {
+  color: rgb(78, 0, 151);
+  background-color: rgb(132, 6, 249);
+  border-color: rgb(78, 0, 151);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

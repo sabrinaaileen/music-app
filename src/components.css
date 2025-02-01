@@ -1,0 +1,30 @@
+.container {
+  padding: 20px;
+  margin: 15px;
+  background-color: rgba(138, 43, 226, 0.2);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 38px;
+  line-height: 1.5;
+  letter-spacing: 3px;
+  font-weight: bold;
+  color: rgb(132, 6, 249);
+  margin: 10px;
+}
+.song-input-search,
+.song-input-submit {
+  padding: 10px;
+  background-color: rgb(132, 6, 249);
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-right: 10px;
+  color: #fff;
+  font-weight: bold;
+}
+.song-input-search::placeholder {
+  color: #fff;
+}
