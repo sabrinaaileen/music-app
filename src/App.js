@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 
+import NowPlaying from "./components/NowPlaying";
 import RecentlyPlayed from "./components/RecentlyPlayed";
 import TopHits from "./components/TopHits";
 import SearchBar from "./components/SearchBar";
@@ -23,7 +24,7 @@ const getTokenFromUrl = () => {
 
 function App() {
   const [spotifyToken, setSpotifyToken] = useState("");
-  const [nowPlaying, setNowPlaying] = useState({});
+
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -42,16 +43,6 @@ function App() {
     }
   });
 
-  const getNowPlaying = () => {
-    spotifyApi.getMyCurrentPlaybackState().then((response) => {
-      console.log(response);
-      setNowPlaying({
-        name: response.item.name,
-        albumArt: response.item.album.images[0].url,
-      });
-    });
-  };
-
   return (
     <div className="App">
       <div>
@@ -60,20 +51,7 @@ function App() {
             Login to Spotify
           </a>
         )}
-        <div className="now-playing-container">
-          {loggedIn && <h1>Welcome to your Music!</h1>}
-          {loggedIn && (
-            <>
-              <h2>Now Playing: {nowPlaying.name}</h2>
-              <div>
-                <img src={nowPlaying.albumArt} style={{ height: 150 }} />
-              </div>
-            </>
-          )}
-          {loggedIn && (
-            <button onClick={() => getNowPlaying()}>Check Now Playing</button>
-          )}
-        </div>
+        {loggedIn && <NowPlaying />}
       </div>
       <main>
         {loggedIn && <SearchBar />}
