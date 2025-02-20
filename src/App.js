@@ -26,6 +26,7 @@ function App() {
   const [spotifyToken, setSpotifyToken] = useState("");
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     console.log("This is what you get.", getTokenFromUrl());
@@ -43,6 +44,11 @@ function App() {
     }
   });
 
+  //Function to handle the search term
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <div className="App">
       <div>
@@ -54,11 +60,11 @@ function App() {
         {loggedIn && <NowPlaying />}
       </div>
       <main>
-        {loggedIn && <SearchBar />}
+        {loggedIn && <SearchBar onSearch={handleSearch} />}
         {loggedIn && (
           <div className="grid">
             <div className="grid-item">
-              <SearchResults />
+              <SearchResults searchTerm={searchTerm} />
             </div>
             <div className="grid-item">
               <Playlist />

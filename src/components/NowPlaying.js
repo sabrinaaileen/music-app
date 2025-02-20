@@ -16,7 +16,9 @@ export default function NowPlaying() {
           albumArt: response.item.album.images[0].url,
         });
       } else {
-        return <p>No music is playing...</p>;
+        setNowPlaying({
+          name: "No music is playing...",
+        });
       }
     });
   };
