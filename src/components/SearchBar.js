@@ -1,13 +1,19 @@
+import SpotifyWebApi from "spotify-web-api-js";
 import "../components.css";
 import React, { useState } from "react";
+
+const spotifyApi = new SpotifyWebApi();
 
 export default function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   function getSearch(event) {
     event.preventDefault();
-    onSearch(searchTerm);
     console.log("Search term:", searchTerm);
+    spotifyApi.searchTracks(searchTerm, { limit: 10 }).then((response) => {
+      const tracks = response.tracks.items;
+      onSearch(tracks); //Pass the fetched songs to the parent component
+    });
   }
 
   return (
@@ -16,8 +22,9 @@ export default function SearchBar({ onSearch }) {
       <form onSubmit={getSearch}>
         <input
           type="text"
-          placeholder="Type..."
+          placeholder="Type a song..."
           className="song-input-search"
+          value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <input type="submit" value="Submit" className="song-input-submit" />

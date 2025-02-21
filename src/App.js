@@ -8,6 +8,8 @@ import TopHits from "./components/TopHits";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
+import CreatePlaylist from "./components/CreatePlaylist";
+import PlaylistList from "./components/PlaylistList";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -24,9 +26,10 @@ const getTokenFromUrl = () => {
 
 function App() {
   const [spotifyToken, setSpotifyToken] = useState("");
-
   const [loggedIn, setLoggedIn] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [playlists, setPlaylists] = useState([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [searchedSongs, setSearchedSongs] = useState([]);
 
   useEffect(() => {
     console.log("This is what you get.", getTokenFromUrl());
@@ -42,11 +45,33 @@ function App() {
       });
       setLoggedIn(true);
     }
-  });
+  }, []);
 
-  //Function to handle the search term
-  const handleSearch = (term) => {
-    setSearchTerm(term);
+  //Function to handle the create playlist
+  const handleCreatePlaylist = (name) => {
+    const newPlaylist = { name, tracks: [] };
+    setPlaylists([...playlists, newPlaylist]);
+  };
+
+  //Function to selct playlist
+  const handleSelectPlaylist = (playlist) => {
+    setSelectedPlaylist(playlist);
+  };
+
+  //Function to handle adding a track to a playlist
+  const handleAddTrackToPlaylist = (track) => {
+    if (selectedPlaylist) {
+      const updatedPlaylists = playlists.map((playlist) => {
+        if (playlist === selectedPlaylist) {
+          return {
+            ...playlist,
+            tracks: [...playlist.tracks, track],
+          };
+        }
+        return playlist;
+      });
+      setPlaylists(updatedPlaylists);
+    }
   };
 
   return (
@@ -60,14 +85,22 @@ function App() {
         {loggedIn && <NowPlaying />}
       </div>
       <main>
-        {loggedIn && <SearchBar onSearch={handleSearch} />}
+        {loggedIn && <SearchBar onSearch={setSearchedSongs} />}
         {loggedIn && (
           <div className="grid">
             <div className="grid-item">
-              <SearchResults searchTerm={searchTerm} />
+              <SearchResults
+                searchedSongs={searchedSongs}
+                onAddTrack={handleAddTrackToPlaylist}
+              />
             </div>
             <div className="grid-item">
-              <Playlist />
+              <CreatePlaylist onCreatePlaylist={handleCreatePlaylist} />
+              <PlaylistList
+                playlists={playlists}
+                onSelect={handleSelectPlaylist}
+              />
+              <Playlist playlist={selectedPlaylist} />
             </div>
           </div>
         )}

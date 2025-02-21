@@ -1,29 +1,18 @@
 import "../components.css";
-import React, { useEffect, useState } from "react";
-import SpotifyWebApi from "spotify-web-api-js";
+import React from "react";
 
-const spotifyApi = new SpotifyWebApi();
-
-export default function SearchResults({ searchTerm }) {
-  const [results, setResults] = useState([]);
-
-  useEffect(() => {
-    if (searchTerm) {
-      spotifyApi.searchTracks(searchTerm).then((response) => {
-        setResults(response.tracks.items);
-      });
-    } else {
-      setResults([]);
-    }
-  }, [searchTerm]);
-
+export default function SearchResults({ searchedSongs, onAddTrack }) {
   return (
     <div className="container">
       <h2>Results:</h2>
       <ul>
-        {results.map((track) => (
+        {searchedSongs.map((track) => (
           <li key={track.id}>
-            {track.name} by {track.artists[0].name}
+            {track.name} by{" "}
+            {track.artists && track.artists.length > 0
+              ? track.artists.map((artist) => artist.name).join(", ")
+              : "Unknown Artist"}
+            <button onClick={() => onAddTrack(track)}>+</button>
           </li>
         ))}
       </ul>
