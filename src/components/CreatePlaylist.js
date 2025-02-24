@@ -2,21 +2,18 @@ import React, { useState } from "react";
 
 export default function CreatePlaylist({ onCreatePlaylist }) {
   const [playlistName, setPlaylistName] = useState("");
-  const [selectedTracks, setSelectedTracks] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onCreatePlaylist(playlistName, selectedTracks);
+    onCreatePlaylist(playlistName);
   };
-
-  const handleTrackSolution = (track) => {};
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="name your new plalist..."
+          placeholder="name your new playlist..."
           value={playlistName}
           onChange={(e) => setPlaylistName(e.target.value)}
         />
