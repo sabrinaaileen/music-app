@@ -2,7 +2,12 @@ import "../components.css";
 import React from "react";
 
 export default function Playlist({ playlist, trackList }) {
-  if (!playlist) return <div>Select a Playlist to view tracks.</div>;
+  if (!playlist)
+    return (
+      <div className="playlist-info-text">
+        Select a Playlist to view tracks.
+      </div>
+    );
 
   return (
     <div className="container">
@@ -11,7 +16,7 @@ export default function Playlist({ playlist, trackList }) {
         {trackList.length > 0 ? (
           trackList.map((item) => (
             <li key={item.track.id}>
-              {item.track.name} by{" "}
+              {item.track.name} <span className="bold-text">by </span>
               {item.track.artists && item.track.artists.length > 0
                 ? item.track.artists.map((artist) => artist.name).join(", ")
                 : "Unknown Artist"}
@@ -27,6 +32,7 @@ export default function Playlist({ playlist, trackList }) {
             href={playlist.external_urls.spotify}
             target="_blank"
             rel="noopener noreferrer"
+            className="playlist-external-link"
           >
             Visit Spotify to see the whole list
           </a>

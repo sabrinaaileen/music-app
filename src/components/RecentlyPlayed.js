@@ -30,9 +30,12 @@ export default function RecentlyPlayed() {
       <h2>Recently played:</h2>
       <ul>
         {recentTracks.map((item) => (
-          <li key={item.track.id}>
-            {item.track.name} by{" "}
-            {item.track.artists.map((artist) => artist.name).join(", ")}
+          <li key={item.track.id} className="recently-played-listitem">
+            {item.track.name} <br /> <br />{" "}
+            <span className="bold-text">by </span>
+            <span className="italic-artist">
+              {item.track.artists.map((artist) => artist.name).join(", ")}
+            </span>
           </li>
         ))}
       </ul>

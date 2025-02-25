@@ -162,7 +162,7 @@ function App() {
                 onAddTrack={handleAddTrackToPlaylist}
               />
             </div>
-            <div className="grid-item">
+            <div className="grid-item container">
               <CreatePlaylist onCreatePlaylist={handleCreatePlaylist} />
               <PlaylistList
                 playlists={playlists}

@@ -30,7 +30,7 @@ export default function TopHits() {
       <h2>Look at your top hits and artists:</h2>
       <ul>
         {topHits.map((track) => (
-          <li key={track.id}>
+          <li key={track.id} className="top-hits-listitem">
             {track.name} by{" "}
             {track.artists.map((artist) => artist.name).join(", ")}
           </li>

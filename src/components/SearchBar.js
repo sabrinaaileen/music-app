@@ -10,7 +10,7 @@ export default function SearchBar({ onSearch }) {
   function getSearch(event) {
     event.preventDefault();
     console.log("Search term:", searchTerm);
-    spotifyApi.searchTracks(searchTerm, { limit: 10 }).then((response) => {
+    spotifyApi.searchTracks(searchTerm, { limit: 20 }).then((response) => {
       const tracks = response.tracks.items;
       onSearch(tracks); //Pass the fetched songs to the parent component
     });

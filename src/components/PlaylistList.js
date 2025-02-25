@@ -1,4 +1,5 @@
 import React from "react";
+import "../components.css";
 
 export default function PlaylistList({ playlists, onSelect }) {
   return (
@@ -6,7 +7,11 @@ export default function PlaylistList({ playlists, onSelect }) {
       <h2>Your Playlists</h2>
       <ul>
         {playlists.map((playlist, index) => (
-          <li key={index} onClick={() => onSelect(playlist)}>
+          <li
+            className="playlist-list"
+            key={index}
+            onClick={() => onSelect(playlist)}
+          >
             {playlist.name}
           </li>
         ))}

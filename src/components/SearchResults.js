@@ -12,7 +12,12 @@ export default function SearchResults({ searchedSongs, onAddTrack }) {
             {track.artists && track.artists.length > 0
               ? track.artists.map((artist) => artist.name).join(", ")
               : "Unknown Artist"}
-            <button onClick={() => onAddTrack(track)}>+</button>
+            <button
+              className="add-track-button"
+              onClick={() => onAddTrack(track)}
+            >
+              +
+            </button>
           </li>
         ))}
       </ul>
