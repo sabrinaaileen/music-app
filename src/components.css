@@ -107,3 +107,12 @@ li {
   font-weight: bold;
   text-decoration: none;
 }
+
+@media (max-width: 1200px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  h2 {
+    font-size: 28px;
+  }
+}
