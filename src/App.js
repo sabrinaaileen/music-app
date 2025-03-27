@@ -11,6 +11,7 @@ import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
 import CreatePlaylist from "./components/CreatePlaylist";
 import PlaylistList from "./components/PlaylistList";
+import Footer from "./components/Footer";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -174,18 +175,18 @@ function App() {
             </div>
           </div>
         )}
+        {loggedIn && (
+          <div className="grid">
+            <div className="grid-item">
+              <RecentlyPlayed />
+            </div>
+            <div className="grid-item">
+              <TopHits />
+            </div>
+          </div>
+        )}
       </main>
-
-      {loggedIn && (
-        <div className="grid">
-          <div className="grid-item">
-            <RecentlyPlayed />
-          </div>
-          <div className="grid-item">
-            <TopHits />
-          </div>
-        </div>
-      )}
+      <footer>{loggedIn && <Footer />}</footer>
     </div>
   );
 }
