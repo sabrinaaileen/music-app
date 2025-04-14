@@ -30,7 +30,11 @@ export default function NowPlaying() {
       <>
         <h2>Now Playing: {nowPlaying.name}</h2>
         <div>
-          <img src={nowPlaying.albumArt} style={{ height: 150 }} />
+          <img
+            src={nowPlaying.albumArt}
+            style={{ height: 150 }}
+            alt="Cover of now playing song"
+          />
         </div>
       </>
 

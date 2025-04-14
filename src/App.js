@@ -34,11 +34,12 @@ function App() {
   const [searchedSongs, setSearchedSongs] = useState([]);
   const [trackList, setTrackList] = useState([]);
 
+  console.log("Spotify Token:", spotifyToken);
+
   useEffect(() => {
     console.log("This is what you get.", getTokenFromUrl());
     const spotifyToken = getTokenFromUrl().access_token;
     window.location.hash = "";
-    console.log("Spotify Token:", spotifyToken);
 
     if (spotifyToken) {
       setSpotifyToken(spotifyToken);
