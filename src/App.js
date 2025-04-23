@@ -148,7 +148,10 @@ function App() {
     <div className="App">
       <div>
         {!loggedIn && (
-          <a href="http://localhost:8888" className="login-button">
+          <a
+            href="https://spotify-authentication-server.onrender.com"
+            className="login-button"
+          >
             Login to Spotify
           </a>
         )}
