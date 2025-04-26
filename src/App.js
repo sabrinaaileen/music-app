@@ -62,6 +62,14 @@ function App() {
     }
   }, []);
 
+  //Check Token
+  useEffect(() => {
+    const token = localStorage.getItem("spotify_token");
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   //Fetch playlist tracks
   useEffect(() => {
     if (selectedPlaylist) {
