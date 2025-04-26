@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import NowPlaying from "./components/NowPlaying";
 import RecentlyPlayed from "./components/RecentlyPlayed";
@@ -144,54 +145,87 @@ function App() {
     }
   };
 
+  function Callback() {
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("access_token");
+      const refresh = params.get("refresh_token");
+
+      if (token) {
+        localStorage.setItem("spotify_token", token);
+        console.log("Spotify Token saved: ", token);
+        //After successful login back to homepage
+        window.location.href = "/";
+      }
+    }, []);
+    return <div>Authentification is running...</div>;
+  }
+
   return (
-    <div className="App">
-      <div>
-        {!loggedIn && (
-          <a
-            href="https://spotify-authentication-server.onrender.com/login"
-            className="login-button"
-          >
-            Login to Spotify
-          </a>
-        )}
-        {loggedIn && <NowPlaying />}
-      </div>
-      <main>
-        {loggedIn && <SearchBar onSearch={setSearchedSongs} />}
-        {loggedIn && (
-          <div className="grid">
-            <div className="grid-item">
-              <SearchResults
-                searchedSongs={searchedSongs}
-                onAddTrack={handleAddTrackToPlaylist}
-              />
-            </div>
-            <div className="grid-item container">
-              <CreatePlaylist onCreatePlaylist={handleCreatePlaylist} />
-              <PlaylistList
-                playlists={playlists}
-                onSelect={handleSelectPlaylist}
-              />
-              <ErrorBoundary>
-                <Playlist playlist={selectedPlaylist} trackList={trackList} />
-              </ErrorBoundary>
-            </div>
-          </div>
-        )}
-        {loggedIn && (
-          <div className="grid">
-            <div className="grid-item">
-              <RecentlyPlayed />
-            </div>
-            <div className="grid-item">
-              <TopHits />
-            </div>
-          </div>
-        )}
-      </main>
-      <footer>{loggedIn && <Footer />}</footer>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <div className="App">
+                <div>
+                  {!loggedIn && (
+                    <a
+                      href="https://spotify-authentication-server.onrender.com/login"
+                      className="login-button"
+                    >
+                      Login to Spotify
+                    </a>
+                  )}
+                  {loggedIn && <NowPlaying />}
+                </div>
+                <main>
+                  {loggedIn && <SearchBar onSearch={setSearchedSongs} />}
+                  {loggedIn && (
+                    <div className="grid">
+                      <div className="grid-item">
+                        <SearchResults
+                          searchedSongs={searchedSongs}
+                          onAddTrack={handleAddTrackToPlaylist}
+                        />
+                      </div>
+                      <div className="grid-item container">
+                        <CreatePlaylist
+                          onCreatePlaylist={handleCreatePlaylist}
+                        />
+                        <PlaylistList
+                          playlists={playlists}
+                          onSelect={handleSelectPlaylist}
+                        />
+                        <ErrorBoundary>
+                          <Playlist
+                            playlist={selectedPlaylist}
+                            trackList={trackList}
+                          />
+                        </ErrorBoundary>
+                      </div>
+                    </div>
+                  )}
+                  {loggedIn && (
+                    <div className="grid">
+                      <div className="grid-item">
+                        <RecentlyPlayed />
+                      </div>
+                      <div className="grid-item">
+                        <TopHits />
+                      </div>
+                    </div>
+                  )}
+                </main>
+                <footer>{loggedIn && <Footer />}</footer>
+              </div>
+            </>
+          }
+        />
+        <Route path="/callback" element={<Callback />} />
+      </Routes>
+    </Router>
   );
 }
 
