@@ -198,6 +198,12 @@ function App() {
     return <div>Authentification is running...</div>;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("spotify_token");
+    setLoggedIn(false);
+    setUserData(null);
+  };
+
   if (loading) {
     return <div>Loading App...</div>;
   }
@@ -254,6 +260,9 @@ function App() {
                             <TopHits />
                           </div>
                         </div>
+                        <button onClick={handleLogout} className="login-button">
+                          Logout
+                        </button>
                       </main>
                       <footer>
                         <Footer />
