@@ -8,6 +8,13 @@ export default function RecentlyPlayed() {
   const [recentTracks, setRecentTracks] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("spotify_token");
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
+  });
+
+  useEffect(() => {
     getRecentTracks();
   }, []);
 

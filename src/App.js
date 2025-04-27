@@ -218,12 +218,18 @@ function App() {
               <div className="App">
                 <div>
                   {!loggedIn ? (
-                    <a
-                      href="https://spotify-authentication-server.onrender.com/login"
-                      className="login-button"
-                    >
-                      Login to Spotify
-                    </a>
+                    <div>
+                      <a
+                        href="https://spotify-authentication-server.onrender.com/login"
+                        className="login-button"
+                      >
+                        Login to Spotify
+                      </a>
+                      <p className="login-paragraph">
+                        Please be patient. The backend server is sleeping and
+                        needs a few moments to awake!
+                      </p>
+                    </div>
                   ) : userData ? (
                     <div>
                       <main>

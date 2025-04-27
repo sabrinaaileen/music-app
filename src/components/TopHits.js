@@ -8,6 +8,13 @@ export default function TopHits() {
   const [topHits, setTopHits] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("spotify_token");
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
+  });
+
+  useEffect(() => {
     getTopHits();
   }, []);
 
