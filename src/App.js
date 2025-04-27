@@ -30,6 +30,7 @@ const getTokenFromUrl = () => {
 function App() {
   const [spotifyToken, setSpotifyToken] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [searchedSongs, setSearchedSongs] = useState([]);
@@ -67,6 +68,20 @@ function App() {
     const token = localStorage.getItem("spotify_token");
     if (token) {
       setLoggedIn(true);
+      //When logged in, get user data
+      fetch("https://api.spotify.com/v1/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Spotify user data: ", data);
+          setUserData(data);
+        })
+        .catch((error) => {
+          console.error("Error loading...");
+        });
     }
   }, []);
 
@@ -178,55 +193,58 @@ function App() {
             <>
               <div className="App">
                 <div>
-                  {!loggedIn && (
+                  {!loggedIn ? (
                     <a
                       href="https://spotify-authentication-server.onrender.com/login"
                       className="login-button"
                     >
                       Login to Spotify
                     </a>
+                  ) : userData ? (
+                    <div>
+                      <main>
+                        <NowPlaying />
+                        <SearchBar onSearch={setSearchedSongs} />
+                        <div className="grid">
+                          <div className="grid-item">
+                            <SearchResults
+                              searchedSongs={searchedSongs}
+                              onAddTrack={handleAddTrackToPlaylist}
+                            />
+                          </div>
+                          <div className="grid-item container">
+                            <CreatePlaylist
+                              onCreatePlaylist={handleCreatePlaylist}
+                            />
+                            <PlaylistList
+                              playlists={playlists}
+                              onSelect={handleSelectPlaylist}
+                            />
+                            <ErrorBoundary>
+                              <Playlist
+                                playlist={selectedPlaylist}
+                                trackList={trackList}
+                              />
+                            </ErrorBoundary>
+                          </div>
+                        </div>
+                        <div className="grid">
+                          <div className="grid-item">
+                            <RecentlyPlayed />
+                          </div>
+                          <div className="grid-item">
+                            <TopHits />
+                          </div>
+                        </div>
+                      </main>
+                      <footer>
+                        <Footer />
+                      </footer>
+                    </div>
+                  ) : (
+                    <p>Loading user data...</p>
                   )}
-                  {loggedIn && <NowPlaying />}
                 </div>
-                <main>
-                  {loggedIn && <SearchBar onSearch={setSearchedSongs} />}
-                  {loggedIn && (
-                    <div className="grid">
-                      <div className="grid-item">
-                        <SearchResults
-                          searchedSongs={searchedSongs}
-                          onAddTrack={handleAddTrackToPlaylist}
-                        />
-                      </div>
-                      <div className="grid-item container">
-                        <CreatePlaylist
-                          onCreatePlaylist={handleCreatePlaylist}
-                        />
-                        <PlaylistList
-                          playlists={playlists}
-                          onSelect={handleSelectPlaylist}
-                        />
-                        <ErrorBoundary>
-                          <Playlist
-                            playlist={selectedPlaylist}
-                            trackList={trackList}
-                          />
-                        </ErrorBoundary>
-                      </div>
-                    </div>
-                  )}
-                  {loggedIn && (
-                    <div className="grid">
-                      <div className="grid-item">
-                        <RecentlyPlayed />
-                      </div>
-                      <div className="grid-item">
-                        <TopHits />
-                      </div>
-                    </div>
-                  )}
-                </main>
-                <footer>{loggedIn && <Footer />}</footer>
               </div>
             </>
           }
