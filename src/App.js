@@ -99,10 +99,6 @@ function App() {
     }
   }, []);
 
-  if (loading) {
-    return <div>Loading App...</div>;
-  }
-
   //Fetch playlist tracks
   useEffect(() => {
     if (selectedPlaylist) {
@@ -200,6 +196,10 @@ function App() {
       }
     }, []);
     return <div>Authentification is running...</div>;
+  }
+
+  if (loading) {
+    return <div>Loading App...</div>;
   }
 
   return (
