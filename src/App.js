@@ -31,6 +31,7 @@ function App() {
   const [spotifyToken, setSpotifyToken] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [searchedSongs, setSearchedSongs] = useState([]);
@@ -74,16 +75,33 @@ function App() {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Token invalid or expired");
+          }
+          return response.json();
+        })
         .then((data) => {
           console.log("Spotify user data: ", data);
           setUserData(data);
+          setLoggedIn(true);
         })
         .catch((error) => {
-          console.error("Error loading...");
+          console.error("Problem with Spotify Login: ", error);
+          localStorage.removeItem("spotify_token");
+          setLoggedIn(false);
+        })
+        .finally(() => {
+          setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, []);
+
+  if (loading) {
+    return <div>Loading App...</div>;
+  }
 
   //Fetch playlist tracks
   useEffect(() => {
