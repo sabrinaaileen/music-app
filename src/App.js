@@ -191,7 +191,6 @@ function App() {
     useEffect(() => {
       const params = new URLSearchParams(window.location.search);
       const token = params.get("access_token");
-      const refresh = params.get("refresh_token");
 
       if (token) {
         localStorage.setItem("spotify_token", token);

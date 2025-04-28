@@ -1,7 +1,14 @@
 import "../components.css";
-import React from "react";
+import React, { useState } from "react";
+import RenamePlaylist from "./RenamePlaylist";
 
 export default function Playlist({ playlist, trackList }) {
+  const [playlistName, setPlaylistName] = useState(playlist.name);
+
+  const handleRename = (newName) => {
+    setPlaylistName(newName);
+  };
+
   if (!playlist)
     return (
       <div className="playlist-info-text">
@@ -11,7 +18,14 @@ export default function Playlist({ playlist, trackList }) {
 
   return (
     <div className="container">
-      <h2>{playlist.name}</h2>
+      <div className="grid">
+        <div className="grid-item">
+          <h2>{playlist.name}</h2>
+        </div>
+        <div className="grid-item">
+          <RenamePlaylist playlistName={playlistName} onRename={handleRename} />
+        </div>
+      </div>
       <ul>
         {trackList.length > 0 ? (
           trackList.map((item) => (
