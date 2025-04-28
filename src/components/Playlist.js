@@ -1,6 +1,9 @@
 import "../components.css";
 import React, { useState } from "react";
+import SpotifyWebApi from "spotify-web-api-js";
 import RenamePlaylist from "./RenamePlaylist";
+
+const spotifyApi = new SpotifyWebApi();
 
 export default function Playlist({ playlist, trackList }) {
   const [playlistName, setPlaylistName] = useState(
@@ -9,6 +12,13 @@ export default function Playlist({ playlist, trackList }) {
 
   const handleRename = (newName) => {
     setPlaylistName(newName);
+    useEffect(() => {
+      const token = localStorage.getItem("spotify_token");
+      if (token) {
+        spotifyApi.setAccessToken(token);
+      }
+    });
+    console.log();
   };
 
   if (!playlist)
