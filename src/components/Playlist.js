@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import RenamePlaylist from "./RenamePlaylist";
 
 export default function Playlist({ playlist, trackList }) {
-  const [playlistName, setPlaylistName] = useState(playlist.name);
+  const [playlistName, setPlaylistName] = useState(
+    playlist ? playlist.name : ""
+  );
 
   const handleRename = (newName) => {
     setPlaylistName(newName);
