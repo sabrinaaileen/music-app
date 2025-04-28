@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# Music App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React Music App created with the Spotify API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Spotify Login (OAuth 2.0)
+- See the song that is now playing on Spotify
+- Search for songs, get a list and the option to add them to a selected plalist
+- List of playlists and option to create a new one
+- See the songs of a selected playlist
+- See the recently played songs
+- See your top 5 artists
+- Secure Logout
 
-### `npm start`
+### Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React (Frontend)
+- Spotify Web API
+- Spotify-Authentication-Server (hostet on Render.com)
+- Netlify (Hosting der React App)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Installation
 
-### `npm test`
+Follow these steps to set up and run the Music App locally:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
 
-### `npm run build`
+```bash
+git clone https://github.com/sabrinaaileen/music-app
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Navigate into the project directory:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+cd music-app
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install all dependencies:
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. (Optional) Create a .env file in the root directory:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```env
+REACT_APP_AUTH_SERVER_URL=https://spotify-authentication-server.onrender.com
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. Start the development server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
+
+6. Open your browser and navigate to:
+
+```bash
+http://localhost:3000
+```
+
+### Troubleshooting
+
+If you encounter any issues while running the Music App, check the following:
+
+#### 1. Spotify login fails or shows an error
+
+- Ensure your Auth Server is correctly deployed (e.g. on Render)
+- Confirm the Redirect URI matches exactly in your Spotify Developer Dashboard
+
+#### 2. "No token provided" or "401 Unauthorized" errors
+
+- Make sure the token is correctly stored in localStorage
+- Verify that API requests include the `Authorization: Bearer <token>` header
+- Try logging out and logging back in to refresh the token
+
+#### 3. Plalist list is empty after login
+
+- Ensure the token is set using `spotifyApi.setAccessToken(token)` before making requests
+- Manually refresh the playlist if necessary
+
+#### 4. Development server doesn't start
+
+- Confirm Node.js and npm are installed correctly
+- Run `npm install` to ensure all dependencies are installed
+- Ensure you are running the app inside the correct project folder
+
+#### 5. Environment variables not recognized
+
+- Check that the `.env` file is located at the project root
+- Environment variables must start with `REACT_APP_` to be recognized by Create React App
+- Restart your server after changing the `.env` file
+
+### License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+### Author
+
+- Sabrina Aileen Hodapp
+- sabrinaaileen (https://github.com/sabrinaaileen)
+- https://www.sabrina-aileen-hodapp.de
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

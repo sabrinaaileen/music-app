@@ -10,15 +10,26 @@ export default function Playlist({ playlist, trackList }) {
     playlist ? playlist.name : ""
   );
 
+  //Set up Spotify access token on mount
+  useEffect(() => {
+    const token = localStorage.getItem("spotify_token");
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
+  }, []); //Empty dependency array means this runs once when the component mounts
+
   const handleRename = (newName) => {
     setPlaylistName(newName);
-    useEffect(() => {
-      const token = localStorage.getItem("spotify_token");
-      if (token) {
-        spotifyApi.setAccessToken(token);
-      }
-    });
-    console.log();
+    //Make the API call to rename playlist
+    const playlistId = playlist.id; //Ensure you have playlist ID
+    spotifyApi
+      .changePlaylistDetails(playlistId, { name: newName })
+      .then((response) => {
+        console.log("Updated playlist name on Spotify: ", response);
+      })
+      .catch((error) => {
+        console.error("Error updating playlist name: ", error);
+      });
   };
 
   if (!playlist)
