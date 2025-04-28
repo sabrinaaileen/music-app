@@ -20,6 +20,14 @@ export default function SearchResults({ searchedSongs, onAddTrack }) {
             >
               +
             </button>
+            {track.preview_url ? (
+              <audio controls>
+                <source src={track.preview_url} type="audio/mpeg" />
+                🎶
+              </audio>
+            ) : (
+              <span>🚫</span>
+            )}
           </li>
         ))}
       </ul>
