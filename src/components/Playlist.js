@@ -43,7 +43,7 @@ export default function Playlist({ playlist, trackList }) {
     <div className="container">
       <div className="grid">
         <div className="grid-item">
-          <h2>{playlist.name}</h2>
+          <h2>{playlistName}</h2>
         </div>
         <div className="grid-item">
           <RenamePlaylist playlistName={playlistName} onRename={handleRename} />
