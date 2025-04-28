@@ -66,7 +66,7 @@ export default function Playlist({ playlist, trackList, onRemoveTrack }) {
                 : "Unknown Artist"}
               <button
                 className="add-track-button"
-                onClick={() => onRemoveTrack(track)}
+                onClick={() => onRemoveTrack(item)}
               >
                 -
               </button>
