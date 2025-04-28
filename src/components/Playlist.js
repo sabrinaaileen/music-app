@@ -5,7 +5,7 @@ import RenamePlaylist from "./RenamePlaylist";
 
 const spotifyApi = new SpotifyWebApi();
 
-export default function Playlist({ playlist, trackList }) {
+export default function Playlist({ playlist, trackList, onRemoveTrack }) {
   const [playlistName, setPlaylistName] = useState(
     playlist ? playlist.name : ""
   );
@@ -64,6 +64,12 @@ export default function Playlist({ playlist, trackList }) {
               {item.track.artists && item.track.artists.length > 0
                 ? item.track.artists.map((artist) => artist.name).join(", ")
                 : "Unknown Artist"}
+              <button
+                className="add-track-button"
+                onClick={() => onRemoveTrack(track)}
+              >
+                -
+              </button>
             </li>
           ))
         ) : (

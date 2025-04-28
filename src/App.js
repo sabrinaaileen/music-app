@@ -187,6 +187,43 @@ function App() {
     }
   };
 
+  //Function to handle removing a track from a playlist
+  const handleRemoveTrackFromPlaylist = (track) => {
+    if (selectedPlaylist) {
+      const trackUri = track.uri;
+      spotifyApi
+        .removeTracksFromPlaylist(selectedPlaylist.id, [trackUri])
+        .then((response) => {
+          console.log("Track removed from playlist: ", response);
+          const updatedPlaylists = playlists.map((playlist) => {
+            if (playlist.id === selectedPlaylist.id) {
+              //Filter out the removed track from the playlists tracks
+              const updatedTracks = selectedPlaylist.tracks.filter(
+                (t) => t.uri !== trackUri
+              );
+              return {
+                ...playlist,
+                tracks: updatedTracks,
+              };
+            }
+            return playlist;
+          });
+
+          //Update the playlists state in the UI
+          setPlaylists(updatedPlaylists);
+
+          //Update the selected playlists tracks
+          setSelectedPlaylist((prev) => ({
+            ...prev,
+            tracks: prev.tracks.filter((t) => t.uri !== trackUri), //Remove the track
+          }));
+        })
+        .catch((error) => {
+          console.log("Error removing track from playlist: ", error);
+        });
+    }
+  };
+
   function Callback() {
     useEffect(() => {
       const params = new URLSearchParams(window.location.search);
@@ -258,6 +295,7 @@ function App() {
                               <Playlist
                                 playlist={selectedPlaylist}
                                 trackList={trackList}
+                                onRemoveTrack={handleRemoveTrackFromPlaylist}
                               />
                             </ErrorBoundary>
                           </div>
