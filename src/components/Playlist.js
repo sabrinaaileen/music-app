@@ -18,6 +18,13 @@ export default function Playlist({ playlist, trackList }) {
     }
   }, []); //Empty dependency array means this runs once when the component mounts
 
+  // Update playlist name when the playlist prop changes
+  useEffect(() => {
+    if (playlist) {
+      setPlaylistName(playlist.name);
+    }
+  }, [playlist]); // This will run whenever the playlist changes
+
   const handleRename = (newName) => {
     setPlaylistName(newName);
     //Make the API call to rename playlist
