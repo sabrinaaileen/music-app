@@ -41,12 +41,17 @@ function App() {
 
   useEffect(() => {
     console.log("This is what you get.", getTokenFromUrl());
-    const spotifyToken = getTokenFromUrl().access_token;
+    const tokenFromUrl = getTokenFromUrl().access_token;
+    const tokenFromStorage = localStorage.getItem("spotify_token");
     window.location.hash = "";
+    let token = tokenFromUrl || tokenFromStorage;
 
-    if (spotifyToken) {
-      setSpotifyToken(spotifyToken);
-      spotifyApi.setAccessToken(spotifyToken);
+    if (token) {
+      setSpotifyToken(token);
+      spotifyApi.setAccessToken(token);
+      if (tokenFromUrl) {
+        localStorage.setItem("spotify_token", tokenFromUrl);
+      }
       //Fetch user playlists
       spotifyApi
         .getUserPlaylists({ limit: 10 })
