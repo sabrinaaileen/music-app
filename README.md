@@ -8,7 +8,7 @@ This is a React Music App created with the Spotify API.
 - See the song that is now playing on Spotify
 - Search for songs, get a list and the option to add them to a selected plalist
 - List of playlists and option to create a new one
-- See the songs of a selected playlist
+- See the songs of a selected playlist, option to change the name or remove songs
 - See the recently played songs
 - See your top 5 artists
 - Secure Logout
@@ -45,7 +45,7 @@ npm install
 4. (Optional) Create a .env file in the root directory:
 
 ```env
-REACT_APP_AUTH_SERVER_URL=https://spotify-authentication-server.onrender.com
+REDIRECT_URI=https://spotify-authentication-server.onrender.com
 ```
 
 5. Start the development server:
@@ -102,8 +102,17 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 - sabrinaaileen (https://github.com/sabrinaaileen)
 - https://www.sabrina-aileen-hodapp.de
 
+### Photos
+
+![Screenshot Login](photos/music-app-login.png)
+![Homepage Screenshot 1](photos/music-app-homepage-1.png)
+![Homepage Screenshot 2](photos/music-app-homepage-2.png)
+![Homepage Screenshot 3](photos/music-app-homepage-3.png)
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+To learn more about the [Spotify Web API](https://developer.spotify.com/documentation/web-api).
