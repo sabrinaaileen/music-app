@@ -58,15 +58,15 @@ export default function Playlist({ playlist, trackList, onRemoveTrack }) {
       </div>
       <ul>
         {trackList.length > 0 ? (
-          trackList.map((item) => (
-            <li key={item.track.id}>
-              {item.track.name} <span className="bold-text">by </span>
-              {item.track.artists && item.track.artists.length > 0
-                ? item.track.artists.map((artist) => artist.name).join(", ")
+          trackList.map((track) => (
+            <li key={track.id}>
+              {track.name} <span className="bold-text">by </span>
+              {track.artists && track.artists.length > 0
+                ? track.artists.map((artist) => artist.name).join(", ")
                 : "Unknown Artist"}
               <button
                 className="add-track-button"
-                onClick={() => onRemoveTrack(item)}
+                onClick={() => onRemoveTrack(track)}
               >
                 -
               </button>
