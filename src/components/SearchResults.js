@@ -2,6 +2,7 @@ import "../components.css";
 import React from "react";
 
 export default function SearchResults({ searchedSongs, onAddTrack }) {
+  console.log(searchedSongs);
   return (
     <div className="container">
       <h2>Results:</h2>
