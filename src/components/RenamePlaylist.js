@@ -29,7 +29,9 @@ export default function RenamePlaylist({ playlistName, onRename }) {
 
   return (
     <div>
-      <button onClick={openModal}>🖋</button>
+      <button onClick={openModal} title="Rename the selected playlist">
+        🖋
+      </button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2>Change the name of this playlist</h2>
         <form onSubmit={handleSubmit}>
@@ -37,10 +39,17 @@ export default function RenamePlaylist({ playlistName, onRename }) {
             type="text"
             value={newName}
             onChange={handleNameChange}
+            placeholder="Enter the new name"
             required
           />
-          <button type="submit">✅</button>
-          <button type="button" onClick={closeModal}>
+          <button type="submit" title="Submit the changes">
+            ✅
+          </button>
+          <button
+            type="button"
+            onClick={closeModal}
+            title="Exit the progress without saving changes"
+          >
             ❌
           </button>
         </form>

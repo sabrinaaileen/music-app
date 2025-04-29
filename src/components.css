@@ -82,6 +82,9 @@ li {
 .search-result-listitem {
   padding: 7px;
 }
+.listen-on-spotify-link {
+  text-decoration: none;
+}
 .top-hits-listitem {
   padding: 5px;
   margin-bottom: 10px;

@@ -48,14 +48,11 @@ export default function Playlist({ playlist, trackList, onRemoveTrack }) {
 
   return (
     <div className="container">
-      <div className="grid">
-        <div className="grid-item">
-          <h2>{playlistName}</h2>
-        </div>
-        <div className="grid-item">
-          <RenamePlaylist playlistName={playlistName} onRename={handleRename} />
-        </div>
-      </div>
+      <span>
+        <h2>{playlistName}</h2>
+
+        <RenamePlaylist playlistName={playlistName} onRename={handleRename} />
+      </span>
       <ul>
         {trackList.length > 0 ? (
           trackList.map((item) => (
@@ -66,6 +63,7 @@ export default function Playlist({ playlist, trackList, onRemoveTrack }) {
                 : "Unknown Artist"}
               <button
                 className="add-track-button"
+                title="Remove this track from the playlist"
                 onClick={() => onRemoveTrack(item.track)}
               >
                 -

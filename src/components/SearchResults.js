@@ -17,6 +17,7 @@ export default function SearchResults({ searchedSongs, onAddTrack }) {
             </span>
             <button
               className="add-track-button"
+              title="Add this track to a selected plalist"
               onClick={() => onAddTrack(track)}
             >
               +
@@ -39,6 +40,7 @@ export default function SearchResults({ searchedSongs, onAddTrack }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   title="Listen full song on Spotify"
+                  className="listen-on-spotify-link"
                 >
                   ▶️ 🔊
                 </a>
