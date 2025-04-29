@@ -6,7 +6,7 @@ This is a React Music App created with the Spotify API.
 
 - Spotify Login (OAuth 2.0)
 - See the song that is now playing on Spotify
-- Search for songs, get a list and the option to add them to a selected plalist
+- Search for songs, get a list and the option to add them to a selected plalist and get a preview or the link to the full song on Spotify
 - List of playlists and option to create a new one
 - See the songs of a selected playlist, option to change the name or remove songs
 - See the recently played songs
