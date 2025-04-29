@@ -23,11 +23,26 @@ export default function SearchResults({ searchedSongs, onAddTrack }) {
             </button>
             {track.preview_url ? (
               <audio controls>
-                <source src={track.preview_url} type="audio/mpeg" />
-                🎶
+                <source
+                  src={track.preview_url}
+                  type="audio/mpeg"
+                  title="click for preview"
+                />{" "}
+                🎶{" "}
               </audio>
             ) : (
-              <span>🚫</span>
+              <span title="No preview available">
+                {" "}
+                🚫{" "}
+                <a
+                  href={track.external_urls.spotify}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Listen full song on Spotify"
+                >
+                  ▶️ 🔊
+                </a>
+              </span>
             )}
           </li>
         ))}
